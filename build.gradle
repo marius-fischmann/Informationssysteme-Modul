@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.4'
+    id "com.github.ben-manes.versions" version "0.38.0"
+}
+
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+group = "com.haw.srs"
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    jcenter()
+    maven { url "https://repo.spring.io/release" }
+}
+
+dependencies {
+
+    // compiletime dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'javax.xml.bind:jaxb-api'
+    compileOnly 'org.projectlombok:lombok:1.18.18'
+    annotationProcessor 'org.projectlombok:lombok:1.18.18'
+
+    // runtime dependencies
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'com.h2database:h2'
+
+    // dependencies for test-execution
+    testImplementation 'org.assertj:assertj-core:3.19.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter'
+    }
+    failFast = true
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+}

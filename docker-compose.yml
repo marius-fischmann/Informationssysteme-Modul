@@ -1,0 +1,16 @@
+version: '3.7'
+
+networks:
+  my_docker_network:
+
+services:
+  mysql:
+    image: mysql:8.0.19
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    networks:
+      - my_docker_network
+
